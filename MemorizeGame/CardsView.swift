@@ -1,11 +1,11 @@
 import SwiftUI
 
-struct CardView: View {
+struct CardsView: View {
     typealias Card = MemoryGame<String>.Card
 
     let card: Card
     
-    init(_ card: MemoryGame<String>.Card) {
+    init(_ card: Card) {
         self.card = card
     }
     
@@ -18,7 +18,9 @@ struct CardView: View {
                 Text(card.content)
                     .font(.system(size: 200))
                     .minimumScaleFactor(0.01)
+                    .multilineTextAlignment(.center)
                     .aspectRatio(1, contentMode: .fit)
+                    .padding(5)
             }
             .opacity(card.isFaceUp ? 1 : 0)
             base.fill()
@@ -29,9 +31,17 @@ struct CardView: View {
 }
 
 #Preview {
-    typealias Card = MemoryGame<String>.Card
-    
-    CardView(Card(content: "X", id: "test1"))
-        .padding()
-        .foregroundStyle(.green)
+  VStack {
+    HStack {
+      CardsView(MemoryGame<String>.Card(isFaceUp: true, content: "X", id: "test1"))
+      CardsView(MemoryGame<String>.Card(content: "X", id: "test1"))
+        .aspectRatio(4/3, contentMode: .fit)
+    }
+    HStack {
+      CardsView(MemoryGame<String>.Card(isFaceUp: true, content: "This is a very long string and I hope it fits", id: "test1"))
+      CardsView(MemoryGame<String>.Card(isFaceUp: true, content: "X", id: "test1"))
+    }
+  }
+  .padding()
+  .foregroundStyle(.green)
 }
