@@ -22,7 +22,7 @@ struct CardsView: View {
 						.padding(Constants.Pie.inset)
 				)
 				.padding(Constants.inset)
-				.modifier(Cardify(isFaceUp: card.isFaceUp))
+				.cardify(isFaceUp: card.isFaceUp)
 				.opacity(card.isFaceUp || !card.isMatched ? 1 : 0)
 		}
 	}
